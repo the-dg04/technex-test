@@ -10,11 +10,9 @@ export default function Hero() {
     container: containerRef,
   });
   const linkOpacityProgress=useTransform(scrollYProgress,[0.9,1],[0,1])
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    // console.log("Page scroll: ", latest);
-    heroRef.current.style.height = latest * window.innerHeight + "px";
-    heroRef.current.style.top = ((1 - latest) * window.innerHeight) / 2 + "px";
-  });
+  const heightProgress=useTransform(()=>scrollYProgress.get()*window.innerHeight + "px")
+  const topProgress=useTransform(()=>(1-scrollYProgress.get())*window.innerHeight/2 + "px")
+
   return (
     <>
       <div className="w-screen h-screen relative top-0 left-0 overflow-y-scroll overflow-x-clip no-scrollbar ">
@@ -28,9 +26,13 @@ export default function Hero() {
           className="h-screen w-screen overflow-y-scroll no-scrollbar"
           ref={containerRef}
         >
-          <div
+          <motion.div
             className="sticky top-0 w-full bg-gray-200 text-gray-800 flex items-center justify-center  h-0 overflow-hidden"
             ref={heroRef}
+            style={{
+              height:heightProgress,
+              top:topProgress
+            }}
           >
             <span className="bg-[url('/technexBg3.jpg')] bg-cover bg-center bg-clip-text text-transparent text-[200px] font-[1000]">
               Technex.
@@ -49,7 +51,7 @@ export default function Hero() {
                 team
               </a>
             </motion.div>
-          </div>
+          </motion.div>
           <div className="h-[200vh]" />
         </div>
       </div>
