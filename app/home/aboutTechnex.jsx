@@ -9,7 +9,10 @@ export default function Content() {
     offset: ["start start", "end end"],
   });
 
-  const springScroll = useSpring(scrollYProgress, { stiffness: 50,damping:10 });
+  const springScroll = useSpring(scrollYProgress, {
+    stiffness: 50,
+    damping: 10,
+  });
 
   return (
     <>
