@@ -10,8 +10,9 @@ export default function Hero() {
     container: containerRef,
   });
   const linkOpacityProgress=useTransform(scrollYProgress,[0.9,1],[0,1])
-  const heightProgress=useTransform(()=>scrollYProgress.get()*window.innerHeight + "px")
-  const topProgress=useTransform(()=>(1-scrollYProgress.get())*window.innerHeight/2 + "px")
+  const heightProgress=useTransform(()=>scrollYProgress.get()*100 + "vh")
+  const topProgress=useTransform(()=>(1-scrollYProgress.get())*50 + "vh")
+  
 
   return (
     <>
