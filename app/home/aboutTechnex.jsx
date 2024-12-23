@@ -1,49 +1,87 @@
 "use client";
-import { useScroll, motion, useSpring } from "framer-motion";
-import { useRef } from "react";
+import {
+  useMotionValueEvent,
+  useScroll,
+  motion,
+  useTransform,
+  useInView,
+} from "framer-motion";
+import { useEffect, useRef } from "react";
 
-export default function Content() {
+export default function AboutTechnex() {
   const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { amount: 1 });
   const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
+    container: containerRef,
   });
-
-  const springScroll = useSpring(scrollYProgress, {
-    stiffness: 50,
-    damping: 10,
-  });
-
+  useEffect(() => {
+    if (isInView) {
+      containerRef.current.style.pointerEvents = "auto";
+    } else {
+      // containerRef.current.style.pointerEvents = "none";
+    }
+    console.log(isInView);
+  }, [isInView]);
+  const leftProgress = useTransform(() => scrollYProgress.get() * 50 + "vw");
   return (
-    <>
-      <div
-        className="w-full h-fit relative overflow-x-clip bg-gray-200"
-        ref={containerRef}
+    <div
+      className="h-[100vh] w-full overflow-y-scroll no-scrollbar snap-y snap-mandatory relative pointer-events-none hidden md:block snap-start"
+      ref={containerRef}
+    >
+      <motion.div
+        className="w-[50vw] h-[300vh] absolute top-0 bg-gray-600 flex flex-col"
+        style={{ left: leftProgress }}
       >
-        <motion.div
-          className="sticky top-0 h-[20px] w-screen bg-[#131341] origin-left z-[1]"
-          style={{ scaleX: springScroll }}
-        ></motion.div>
-        <div className="w-full flex max-[500px]:flex-col bg-gradient-to-b from-gray-300 to-gray-800 relative">
-          <div className="sticky top-0 max-[500px]:h-[50px] max-[500px]:w-full h-[100vh] w-[40vw] flex justify-center items-center bg-transparent max-[500px]:bg-gray-800 max-[500px]:opacity-70 max-[500px]:rounded-b-2xl">
-            <div className="text-white text-2xl font-bold">About Technex</div>
+        <div className="h-1/3 bg-gradient-to-b from-gray-400 to-gray-500 flex justify-center items-center">
+          <div className="p-4 text-5xl font-bold rounded-lg gborder gborder-white text-gray-200">
+            About Technex.
           </div>
-          <div className="w-full">
-            <div className="h-[100vh] max-[500px]:h-[50vh] w-full gborder gborder-white flex justify-center items-center big-red-500">
-              <span className="gborder gborder-gray-400 p-4">Content</span>
-            </div>
-            <div className="h-[100vh] max-[500px]:h-[50vh] w-full gborder gborder-white flex justify-center items-center big-yellow-500">
-              <span className="gborder gborder-gray-400 p-4">Content</span>
-            </div>
-            <div className="h-[100vh] max-[500px]:h-[50vh] w-full gborder gborder-white flex justify-center items-center big-red-500">
-              <span className="gborder gborder-gray-400 p-4">Content</span>
-            </div>
-            <div className="h-[100vh] max-[500px]:h-[50vh] w-full gborder gborder-white flex justify-center items-center big-yellow-500">
-              <span className="gborder gborder-gray-400 p-4">Content</span>
-            </div>
+        </div>
+        <div className="h-1/3 bg-gradient-to-b from-gray-500 to-gray-600 flex justify-center items-center">
+          <div className="p-4 text-5xl font-bold rounded-lg gborder gborder-white text-gray-200">
+            Fuck You. <br />
+            Fuck You. <br />
+            Fuck You. <br />
+            Fuck You. <br />
+            Fuck You.
+          </div>
+        </div>
+        <div className="h-1/3 bg-gradient-to-b from-gray-600 to-gray-700 flex justify-center items-center">
+          <div className="p-4 text-5xl font-bold rounded-lg gborder gborder-white text-gray-200">
+            No seriously, FUCK YOU.
+          </div>
+        </div>
+      </motion.div>
+      <div className="h-[100vh] snap-start bg-gradient-to-b from-gray-100 to-gray-200 flex">
+        <div className="w-1/2 h-full"></div>
+        <div className="w-1/2 h-full flex justify-center items-center">
+          <div className="p-4 text-2xl font-bold rounded-lg gborder gborder-black text-gray-800">
+            Content
           </div>
         </div>
       </div>
-    </>
+      <div className="h-[100vh] snap-start bg-gradient-to-b from-gray-200 to-gray-300 flex">
+        <div className="w-1/2 h-full flex justify-center items-center">
+          {/* <div className="p-4 text-2xl font-bold rounded-lg gborder gborder-black text-gray-800">
+              Content
+            </div> */}
+        </div>
+        <div className="w-1/2 h-full"></div>
+      </div>
+      <div className="h-[100vh] snap-start bg-gradient-to-b from-gray-300 to-gray-400 flex">
+        <div className="w-1/2 h-full flex justify-center items-center">
+          <div className="p-4 text-2xl font-bold rounded-lg gborder gborder-black text-gray-800">
+            Content
+          </div>
+        </div>
+        <div className="w-1/2 h-full"></div>
+      </div>
+    </div>
   );
+}
+
+{
+  /* <div className="h-[100vh] w-full flex justify-center text-gray-800 text-2xl font-bold items-center md:hidden bg-gray-200">
+        [Stats]
+      </div> */
 }
