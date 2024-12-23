@@ -15,7 +15,7 @@ export default function AboutTechnex_old({setLoadNext}) {
   });
 
   useMotionValueEvent(scrollYProgress,"change",(val)=>{
-    if(val>=1){
+    if(val>=0.5){
       setLoadNext(true)
     }
   })

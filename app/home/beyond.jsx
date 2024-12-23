@@ -19,7 +19,7 @@ export default function Beyond({setLoadNext}) {
   const opacityProgress2=useTransform(scrollYProgress,[0.4,1],[0,1])
 
   useMotionValueEvent(scrollYProgress,"change",(val)=>{
-    if(val>=1){
+    if(val>=0.5){
       setLoadNext(true)
     }
   })
