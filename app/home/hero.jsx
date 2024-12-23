@@ -7,7 +7,7 @@ import {
 } from "framer-motion";
 import { useRef, useState } from "react";
 
-export default function Hero() {
+export default function Hero({setLoadNext}) {
   const heroRef = useRef(null);
   const containerRef = useRef(null);
   const linksRef = useRef(null);
@@ -19,9 +19,14 @@ export default function Hero() {
   const topProgress = useTransform(
     () => (1 - scrollYProgress.get()) * 50 + "vh"
   );
+  useMotionValueEvent(scrollYProgress,"change",(val)=>{
+    if(val>=1){
+      setLoadNext(true)
+    }
+  })
 
   return (
-    <div className="w-screen h-screen relative top-0 left-0 overflow-y-scroll overflow-x-clip no-scrollbar snap-start">
+    <div className="w-screen h-screen relative top-0 left-0 overflow-y-scroll overflow-x-clip no-scrollbar snap-start snap-always">
       <div className="absolute top-0 left-0 w-full h-full z-[-1] bg-gray-800 text-gray-200 flex items-center justify-center text-[200px] font-[1000]">
         Technex.
         <div className="absolute z-[-1] bottom-10 w-full text-center pointer-events-none text-sm font-light">

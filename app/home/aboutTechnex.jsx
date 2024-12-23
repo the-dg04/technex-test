@@ -4,28 +4,27 @@ import {
   useScroll,
   motion,
   useTransform,
-  useInView,
+  // useInView,
 } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef,useState } from "react";
 
-export default function AboutTechnex() {
+export default function AboutTechnex({setLoadNext}) {
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { amount: 1 });
   const { scrollYProgress } = useScroll({
     container: containerRef,
   });
-  useEffect(() => {
-    if (isInView) {
-      containerRef.current.style.pointerEvents = "auto";
-    } else {
-      // containerRef.current.style.pointerEvents = "none";
-    }
-    console.log(isInView);
-  }, [isInView]);
+
   const leftProgress = useTransform(() => scrollYProgress.get() * 50 + "vw");
+
+    useMotionValueEvent(scrollYProgress,"change",(val)=>{
+      if(val>=1){
+        setLoadNext(true)
+      }
+    })
+
   return (
     <div
-      className="h-[100vh] w-full overflow-y-scroll no-scrollbar snap-y snap-mandatory relative pointer-events-none hidden md:block snap-start"
+      className="h-[100vh] w-full overflow-y-scroll no-scrollbar snap-y snap-mandatory relative hidden md:block snap-start snap-always"
       ref={containerRef}
     >
       <motion.div
