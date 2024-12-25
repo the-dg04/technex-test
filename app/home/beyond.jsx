@@ -32,7 +32,7 @@ export default function Beyond({setLoadNext}) {
           ref={beyondRef}
           ><span className="backdrop-blur-md rounded-lg p-2 text-gray-900">Beyond.</span></motion.div>
           <motion.div className="sticky top-0 w-full h-[100vh] bg-gray-800 flex items-center justify-center" style={{opacity:opacityProgress2}}>
-            <div className="h-[250px] w-[450px] bg-[url('/monkey.jpg')] bg-cover flex items-center justify-center text-4xl font-extrabold rounded-lg">You are Nigga.</div>
+            <div className="h-[250px] w-[450px] bg-[url('/monkey.jpg')] bg-cover flex items-center justify-center text-4xl font-extrabold rounded-lg">You</div>
           </motion.div>
           <div className="h-[300vh] z-[-1]"></div>
       </div>

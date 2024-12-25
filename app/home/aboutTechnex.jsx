@@ -39,16 +39,17 @@ export default function AboutTechnex({setLoadNext}) {
         </div>
         <div className="h-1/3 bg-gradient-to-b from-gray-500 to-gray-600 flex justify-center items-center">
           <div className="p-4 text-5xl font-bold rounded-lg gborder gborder-white text-gray-200">
+            {/* Fuck You. <br />
             Fuck You. <br />
             Fuck You. <br />
             Fuck You. <br />
-            Fuck You. <br />
-            Fuck You.
+            Fuck You. */}
+            About
           </div>
         </div>
         <div className="h-1/3 bg-gradient-to-b from-gray-600 to-gray-700 flex justify-center items-center">
           <div className="p-4 text-5xl font-bold rounded-lg gborder gborder-white text-gray-200">
-            No seriously, FUCK YOU.
+            Content.
           </div>
         </div>
       </motion.div>
